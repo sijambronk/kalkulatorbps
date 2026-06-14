@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -13,7 +14,7 @@
             --text-color: #333333;
             --border-color: #dddddd;
         }
-        
+
         * {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -32,7 +33,7 @@
         .container {
             background-color: var(--card-bg);
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             width: 100%;
             max-width: 600px;
@@ -71,13 +72,22 @@
             letter-spacing: 1px;
         }
 
-        .header h2, .header h4 {
+        .header h2,
+        .header h4 {
             margin: 0;
             padding: 2px 0;
         }
 
-        .header h2 { font-size: 22px; color: var(--primary-color); }
-        .header h4 { font-size: 15px; font-weight: normal; color: #e0e0e0; }
+        .header h2 {
+            font-size: 22px;
+            color: var(--primary-color);
+        }
+
+        .header h4 {
+            font-size: 15px;
+            font-weight: normal;
+            color: #e0e0e0;
+        }
 
         .form-section {
             padding: 20px 15px 15px 15px;
@@ -111,7 +121,8 @@
             color: #444;
         }
 
-        input[type="text"], input[type="number"] {
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
             padding: 12px;
             font-size: 16px;
@@ -121,7 +132,8 @@
             transition: border-color 0.3s;
         }
 
-        input[type="text"]:focus, input[type="number"]:focus {
+        input[type="text"]:focus,
+        input[type="number"]:focus {
             border-color: var(--primary-color);
         }
 
@@ -178,30 +190,9 @@
             color: #e25555;
             font-size: 14px;
         }
-        @media (max-width: 600px), (max-height: 800px) {
-            body { padding: 0; }
-            .container { border-radius: 0; box-shadow: none; }
-            .header { padding: 10px; border-bottom: 3px solid var(--primary-color); }
-            .header-top { margin-bottom: 8px; }
-            .bps-logo { height: 28px; }
-            .se-logo { font-size: 14px; padding: 2px 6px; }
-            .header h2 { font-size: 18px; }
-            .header h4 { font-size: 13px; }
-            .form-section { padding: 10px; }
-            table { margin-bottom: 10px; }
-            th { padding: 5px; font-size: 14px; }
-            td { padding: 6px 0; }
-            label { font-size: 12px; margin-bottom: 2px; }
-            input[type="text"], input[type="number"] { padding: 8px 10px; font-size: 14px; }
-            .result-box { padding: 10px; margin: 0 10px 10px 10px; }
-            .result-box h3 { font-size: 14px; margin-bottom: 5px; }
-            .result-value { font-size: 20px; }
-            .footer { padding: 8px; font-size: 12px; }
-            .dev-name { font-size: 13px; margin-bottom: 0px; }
-            .dev-id { font-size: 10px; }
-        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -218,7 +209,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Total Biaya Pengeluran & Pendapatan Tahun 2025</th>
+                        <th>Total Biaya Pengeluran & Pendapatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -243,13 +234,15 @@
                     <tr>
                         <td>
                             <label>Berapa Hari Berjualan dalam 1 Minggu?</label>
-                            <input type="number" id="hari_minggu" placeholder="Otomatis 7 jika kosong" min="0" max="7" oninput="calculate()">
+                            <input type="number" id="hari_minggu" placeholder="Otomatis 7 jika kosong" min="0" max="7"
+                                oninput="calculate()">
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label>Berapa Bulan Berjualan Dalam 1 Tahun?</label>
-                            <input type="number" id="bulan_tahun" placeholder="Otomatis 12 jika kosong" min="0" max="12" oninput="calculate()">
+                            <input type="number" id="bulan_tahun" placeholder="Otomatis 12 jika kosong" min="0" max="12"
+                                oninput="calculate()">
                         </td>
                     </tr>
                 </tbody>
@@ -283,7 +276,7 @@
 
             rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
             input.value = rupiah ? 'Rp ' + rupiah : '';
-            
+
             calculate();
         }
 
@@ -297,7 +290,7 @@
             let harian = parseRupiah(document.getElementById('harian').value);
             let mingguan = parseRupiah(document.getElementById('mingguan').value);
             let bulanan = parseRupiah(document.getElementById('bulanan').value);
-            
+
             let strHari = document.getElementById('hari_minggu').value;
             let strBulan = document.getElementById('bulan_tahun').value;
 
@@ -310,17 +303,17 @@
             // Parameter Konstan
             let totalHariSetahun = (bulanPerTahun === 12) ? 365 : (bulanPerTahun * 31);
             let totalMingguSetahun = totalHariSetahun / 7;
-            
+
             // Total hari aktif selama periode berjualan
             let totalHariAktifSetahun = hariPerMinggu * totalMingguSetahun;
 
             // Logika Baru (Semuanya Proporsional):
             // 1. Harian langsung dikali total hari aktif
             let proyeksiHarian = harian * totalHariAktifSetahun;
-            
+
             // 2. Mingguan dibagi 7 lalu dikali total hari aktif
             let proyeksiMingguan = (mingguan / 7) * totalHariAktifSetahun;
-            
+
             // 3. Bulanan dibagi 31 lalu dikali total hari aktif
             let proyeksiBulanan = (bulanan / 31) * totalHariAktifSetahun;
 
@@ -336,4 +329,5 @@
         }
     </script>
 </body>
+
 </html>
