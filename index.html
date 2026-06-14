@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kalkulator BPS SE2026</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #dddddd;
+        }
+        
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+        .header h2, .header h4 {
+            margin: 0;
+            padding: 2px 0;
+        }
+
+        .header h2 { font-size: 22px; }
+        .header h4 { font-size: 16px; font-weight: normal; }
+
+        .form-section {
+            padding: 20px 15px 15px 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            font-size: 16px;
+            color: var(--primary-color);
+        }
+
+        td {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: var(--primary-color);
+        }
+
+        .result-box {
+            background-color: #e6fced;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 0 15px 20px 15px;
+            text-align: center;
+        }
+
+        .result-box h3 {
+            margin: 0 0 10px 0;
+            color: #155724;
+            font-size: 16px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            word-wrap: break-word;
+        }
+
+        .footer {
+            padding: 15px;
+            text-align: left;
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .icon-love {
+            color: #e25555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>Kalkulator BPS SE2026</h2>
+            <h4>Rincian Nilai Pengeluran & Pendapatan Tahun 2025</h4>
+        </div>
+
+        <div class="form-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Total Biaya Pengeluran & Pendapatan Tahun 2025</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label>Biaya Produksi / Penghasilan Harian</label>
+                            <input type="text" id="harian" placeholder="Rp 0" oninput="formatAndCalculate(this)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Biaya Produksi / Penghasilan Mingguan</label>
+                            <input type="text" id="mingguan" placeholder="Rp 0" oninput="formatAndCalculate(this)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Biaya Produksi / Penghasilan Bulanan</label>
+                            <input type="text" id="bulanan" placeholder="Rp 0" oninput="formatAndCalculate(this)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Berapa Hari Berjualan dalam 1 Minggu?</label>
+                            <input type="number" id="hari_minggu" placeholder="Otomatis 7 jika kosong" min="0" max="7" oninput="calculate()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Berapa Bulan Berjualan Dalam 1 Tahun?</label>
+                            <input type="number" id="bulan_tahun" placeholder="Otomatis 12 jika kosong" min="0" max="12" oninput="calculate()">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="result-box">
+            <h3>Hasil Produksi / Penghasilan 1 Tahun</h3>
+            <div class="result-value" id="hasil_tahunan">Rp 0</div>
+        </div>
+
+        <div class="footer">
+            <span class="icon-love">❤️</span> Developed by Muhammad Asyam Ghaly Khairul - Sobat ID 367126050026
+        </div>
+    </div>
+
+    <script>
+        function formatAndCalculate(input) {
+            let value = input.value.replace(/[^,\d]/g, '').toString();
+            let split = value.split(',');
+            let sisa = split[0].length % 3;
+            let rupiah = split[0].substr(0, sisa);
+            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                let separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            input.value = rupiah ? 'Rp ' + rupiah : '';
+            
+            calculate();
+        }
+
+        function parseRupiah(rupiahString) {
+            if (!rupiahString) return 0;
+            let cleanString = rupiahString.replace(/[^,\d]/g, '');
+            return parseInt(cleanString, 10) || 0;
+        }
+
+        function calculate() {
+            let harian = parseRupiah(document.getElementById('harian').value);
+            let mingguan = parseRupiah(document.getElementById('mingguan').value);
+            let bulanan = parseRupiah(document.getElementById('bulanan').value);
+            
+            let strHari = document.getElementById('hari_minggu').value;
+            let strBulan = document.getElementById('bulan_tahun').value;
+
+            let hariPerMinggu = (strHari === "") ? 7 : parseInt(strHari);
+            let bulanPerTahun = (strBulan === "") ? 12 : parseInt(strBulan);
+
+            if (hariPerMinggu > 7) hariPerMinggu = 7;
+            if (bulanPerTahun > 12) bulanPerTahun = 12;
+
+            // Parameter Konstan
+            let totalHariSetahun = (bulanPerTahun === 12) ? 365 : (bulanPerTahun * 31);
+            let totalMingguSetahun = totalHariSetahun / 7;
+            
+            // Total hari aktif selama periode berjualan
+            let totalHariAktifSetahun = hariPerMinggu * totalMingguSetahun;
+
+            // Logika Baru (Semuanya Proporsional):
+            // 1. Harian langsung dikali total hari aktif
+            let proyeksiHarian = harian * totalHariAktifSetahun;
+            
+            // 2. Mingguan dibagi 7 lalu dikali total hari aktif
+            let proyeksiMingguan = (mingguan / 7) * totalHariAktifSetahun;
+            
+            // 3. Bulanan dibagi 31 lalu dikali total hari aktif
+            let proyeksiBulanan = (bulanan / 31) * totalHariAktifSetahun;
+
+            let grandTotalTahunan = proyeksiHarian + proyeksiMingguan + proyeksiBulanan;
+
+            let hasilFormatted = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(Math.round(grandTotalTahunan));
+
+            document.getElementById('hasil_tahunan').innerText = hasilFormatted;
+        }
+    </script>
+</body>
+</html>
