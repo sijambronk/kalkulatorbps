@@ -137,6 +137,7 @@
             border-color: var(--primary-color);
         }
 
+
         .result-box {
             background-color: #fff4ed;
             border: 2px solid var(--primary-color);
@@ -189,6 +190,29 @@
         .icon-love {
             color: #e25555;
             font-size: 14px;
+        }
+        @media (max-width: 600px), (max-height: 800px) {
+            body { padding: 0; }
+            .container { border-radius: 0; box-shadow: none; display: flex; flex-direction: column; justify-content: space-between; height: 100vh; overflow: hidden; }
+            .header { padding: 8px; border-bottom: 2px solid var(--primary-color); }
+            .header-top { margin-bottom: 5px; }
+            .bps-logo { height: 20px; }
+            .se-logo { font-size: 12px; padding: 2px 4px; }
+            .header h2 { font-size: 16px; margin-bottom: 0; }
+            .header h4 { display: none; }
+            .form-section { padding: 5px 10px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+            table { margin-bottom: 5px; }
+            thead { display: none; }
+            td { padding: 4px 0; border-bottom: none; }
+            label { font-size: 11px; margin-bottom: 1px; color: #555; }
+            input[type="text"], input[type="number"] { padding: 6px 8px; font-size: 13px; }
+            .result-box { padding: 8px; margin: 0 10px 5px 10px; }
+            .result-box h3 { font-size: 12px; margin-bottom: 2px; }
+            .result-value { font-size: 18px; }
+            .footer { padding: 5px; font-size: 10px; background-color: #f9f9f9; }
+            .dev-title { margin-bottom: 1px; }
+            .dev-name { font-size: 11px; margin-bottom: 0; }
+            .dev-id { font-size: 9px; }
         }
     </style>
 </head>
