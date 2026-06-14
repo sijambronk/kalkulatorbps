@@ -308,7 +308,7 @@
                 style: 'currency',
                 currency: 'IDR',
                 minimumFractionDigits: 0
-            }).format(Math.round(grandTotalTahunan));
+            }).format(Math.round(grandTotalTahunan / 1000) * 1000);
 
             document.getElementById('hasil_tahunan').innerText = hasilFormatted;
         }
